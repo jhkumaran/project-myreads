@@ -22,25 +22,19 @@ export class SearchBook extends Component {
         }
         BooksAPI.search(this.state.query)
         .then((books) => {
-            this.props.books.map((book) => {
-                let searchResult = books.find(t=> t.id === book.id);
-                if(searchResult){
-                    searchResult.shelf = book.shelf;
-                }
-            })
+            if(this.props.books !== undefined && this.props.books.length > 0){
+                this.props.books.map((book) => {
+                    let searchResult = books.find(t=> t.id === book.id);
+                    if(searchResult){
+                        searchResult.shelf = book.shelf;
+                    }
+                })
+            }
             this.setState({searchResults: books});
         })
         .catch((ex) => {
             console.log(ex);
         })
-    }
-
-    updateShelf = (book) => {
-        let newBooks = [...this.state.searchResults];
-        let bookIndex = newBooks.findIndex(t=> t.id === book.id);
-        newBooks[bookIndex] = book;
-        this.setState({ searchResults: newBooks});
-        BooksAPI.update(book, book.shelf);
     }
 
     render() {
@@ -54,7 +48,7 @@ export class SearchBook extends Component {
                 </div>
                 </div>
                 <div className='search-books-results'>
-                    <BookList books={this.state.searchResults} updateShelf={this.updateShelf}/>
+                    <BookList books={this.state.searchResults} updateShelf={this.props.updateShelf}/>
                 </div>
             </div>
         )

@@ -25,11 +25,14 @@ export class HomePage extends Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
-          <Dashboard books={this.state.books} updateBooks={this.updateBooks} updateShelf={this.updateShelf}/>
+          <Dashboard books={this.state.books} 
+                  updateBooks={this.updateBooks}
+                  updateShelf={this.updateShelf}/>
         )}/>
 
         <Route exact path='/search' render={() => (
-          <SearchBook books={this.state.books}/>
+          <SearchBook books={this.state.books}
+                    updateShelf={this.updateShelf}/>
         )}/>
       </div>
     )

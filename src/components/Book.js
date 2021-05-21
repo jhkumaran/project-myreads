@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import StarRating from './StarRating'
 
 export class Book extends Component {
     updateShelf = (e) => {
@@ -6,6 +7,20 @@ export class Book extends Component {
         book.shelf = e.target.value;
         this.props.updateShelf(book);
     }
+
+    onRatingChanged = (rating) => {
+        const { book } = this.props;
+        if(book.ratingsCount === undefined || book.ratingsCount === 0){
+            book.averageRating = rating;
+            book.ratingsCount = 1;
+        }else{
+            book.averageRating = ((book.averageRating* book.ratingsCount) + rating) /(book.ratingsCount + 1);
+            book.ratingsCount += 1;
+        }
+        this.props.updateShelf(book);
+        this.setState({rating: book.averageRating});
+    }
+
     render() {
         const { book } = this.props;
         return (
@@ -43,6 +58,8 @@ export class Book extends Component {
                         ))
                     }
                 </div>}
+                <StarRating rating={book.averageRating}
+                            updateRating={this.onRatingChanged}/>
             </div>
         )
     }
