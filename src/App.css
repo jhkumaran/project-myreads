@@ -119,7 +119,7 @@ button:active {
 }
 
 .search-books-results {
-  padding: 80px 10px 20px;
+  padding: 50px 10px 20px;
 }
 
 /* books grid */
@@ -208,4 +208,22 @@ button:active {
 
 .clip-star.checked{
   background: gold;
+}
+
+.sort-books{
+  display: flex;
+}
+
+.sort-books h4{
+  margin-left: 10px;
+}
+
+.sort-book-dropdown {
+  margin:10px;
+  height: 40px;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
